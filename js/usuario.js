@@ -4,12 +4,12 @@ window.onload = function() {
         document.querySelector("#VoltarUsuario").href = "/pages/organizacao.html";
         document.querySelector("#CampoPermissao").innerHTML = "<div class=\"form-floating mb-3\">\n" +
             "                <select id=\"NivelUsuario\" class=\"form-select\" id=\"floatingSelect\" aria-label=\"Floating label select example\">\n" +
-            "                    <option selected>Selecione um nivel</option>\n" +
+            "                    <option value=\"null\" selected>Selecione um nivel</option>\n" +
             "                    <option value=\"1\">Dono</option>\n" +
             "                    <option value=\"2\">Administrador</option>\n" +
             "                    <option value=\"3\">Normal</option>\n" +
             "                </select>\n" +
-            "                <label for=\"floatingSelect\">Nivel de Acesso</label>\n" +
+            "                <label for=\"NivelUsuario\">Nivel de Acesso</label>\n" +
             "            </div>";
 
         let modo = (new URLSearchParams(window.location.search)).get("modo");
@@ -80,9 +80,10 @@ window.onload = function() {
     }
 
     if(document.querySelector("#ExecUsuario")){
-        document.querySelector("#NomeUsuario").value = "Usuario_teste";
-        document.querySelector("#EmailUsuario").value = "Usuario_"+Math.floor(Math.random() * 100).toString().padStart(2, '0')+"@mail.com";
-        document.querySelector("#SenhaUsuario").value = "123";
+        // let numero = Math.floor(Math.random() * 100).toString().padStart(2, '0');
+        // document.querySelector("#NomeUsuario").value = "Usuario_"+numero;
+        // document.querySelector("#EmailUsuario").value = "Usuario_"+numero+"@mail.com";
+        // document.querySelector("#SenhaUsuario").value = "123";
         document.querySelector("#ExecUsuario").onclick = function() {
             let body = {};
             body.nome = document.querySelector("#NomeUsuario").value;
@@ -90,6 +91,9 @@ window.onload = function() {
             body.senha = document.querySelector("#SenhaUsuario").value;
             if((new URLSearchParams(window.location.search)).get("modo") === "organizacao"){
                 body.nivel = document.querySelector("#NivelUsuario").value
+                if(body.nivel === 'null'){
+                    body.nivel = 3;
+                }
                 options.headers.Authorization = "Bearer "+ localStorage.getItem("token");
             }
 
