@@ -21,20 +21,20 @@ if(localStorage.getItem("token") !== null){
             .catch(err => console.error(err));
     }
     if((new URL(window.location.href).pathname) === "/pages/login.html"){
-        window.location.assign("/pages/organizacao.html");
+        window.location.assign("../pages/organizacao.html");
     }
 } else {
     let pathname = (new URL(window.location.href).pathname);
 
     if(!(pathname === "/pages/login.html" || (pathname === "/pages/usuario.html"))){
-        window.location.assign("/pages/login.html");
+        window.location.assign("../pages/login.html");
     }
 }
 
 
 
 if(document.querySelector("#navbar")){
-     fetch("/pages/navbar.html")
+     fetch("../pages/navbar.html")
         .then(response => response.text())
         .then(response => {
             document.querySelector("#navbar").innerHTML = response;
@@ -45,7 +45,7 @@ if(document.querySelector("#navbar")){
                 document.querySelector("#SairUsuario").onclick = function () {
                     localStorage.removeItem("token");
                     localStorage.removeItem("organizacao");
-                    window.location.assign("/pages/login.html");
+                    window.location.assign("../pages/login.html");
                 };
             }
         })
@@ -55,7 +55,7 @@ if(document.querySelector("#navbar")){
 }
 
 if(document.querySelector("#navbar-bottom")){
-    fetch("/pages/navbar-bottom.html")
+    fetch("../pages/navbar-bottom.html")
         .then(response => response.text())
         .then(response => {
             document.querySelector("#navbar-bottom").innerHTML = response;

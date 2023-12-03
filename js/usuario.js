@@ -1,7 +1,7 @@
 "use strict";
 window.onload = function() {
     if(localStorage.getItem("token") !== null) {
-        document.querySelector("#VoltarUsuario").href = "/pages/organizacao.html";
+        document.querySelector("#VoltarUsuario").href = "../pages/organizacao.html";
         document.querySelector("#CampoPermissao").innerHTML = "<div class=\"form-floating mb-3\">\n" +
             "                <select id=\"NivelUsuario\" class=\"form-select\" id=\"floatingSelect\" aria-label=\"Floating label select example\">\n" +
             "                    <option value=\"null\" selected>Selecione um nivel</option>\n" +
@@ -132,7 +132,7 @@ window.onload = function() {
                                                         icon: 'success',
                                                         confirmButtonText: 'Ok'
                                                     }).then(() => {
-                                                        window.location.assign("/pages/login.html");
+                                                        window.location.assign("../pages/login.html");
                                                     });
                                                 }
                                             })
@@ -147,7 +147,7 @@ window.onload = function() {
                                 icon: 'success',
                                 confirmButtonText: 'Ok'
                             }).then(() => {
-                                window.location.assign("/pages/organizacao.html");
+                                window.location.assign("../pages/organizacao.html");
                             });
                         }
                     } else if(typeof response.errors !== "undefined"){

@@ -66,10 +66,10 @@ window.onload = function() {
                     if((new URLSearchParams(window.location.search)).get("ambiente") !== null){
                         get = "?id="+(new URLSearchParams(window.location.search)).get("ambiente");
                     }
-                    window.location.assign("/pages/ativos.html"+get);
+                    window.location.assign("../pages/ativos.html"+get);
                 });
             } else {
-                window.location.assign("/pages/ativo.html?id="+code.data);
+                window.location.assign("../pages/ativo.html?id="+code.data);
             }
             // resultDiv.textContent = 'Código QR encontrado: ' + code.data;
         } else {

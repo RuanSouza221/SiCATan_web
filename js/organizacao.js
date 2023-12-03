@@ -1,7 +1,7 @@
 "use strict";
 window.onload = function() {
     if(Nivel_acesso > 2){
-        window.location.assign("/pages/ativos.html");
+        window.location.assign("../pages/ativos.html");
     }
 
     document.querySelector("#Buscar").onclick = function () {
@@ -28,7 +28,7 @@ function BuscarUsuarios (dados= null) {
                     let elem = '<li class="list-group-item">' +
                         ''+elemento.nome+'' +
                         '<div class="float-end">' +
-                        '<a class="link-dark" href="/pages/usuario.html?modo=organizacao&id='+elemento.id+'"><span class="material-symbols-outlined me-3">edit</span></a>' +
+                        '<a class="link-dark" href="../pages/usuario.html?modo=organizacao&id='+elemento.id+'"><span class="material-symbols-outlined me-3">edit</span></a>' +
                         '<a data-id="'+elemento.id+'" class="link-dark DeletarUsuario"><span class="material-symbols-outlined">delete</span></a>\n ' +
                         '</div>' +
                         '</li>';

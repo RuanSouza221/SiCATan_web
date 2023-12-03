@@ -112,10 +112,10 @@ window.onload = function() {
                 body.ativo_ambiente = document.querySelector("#AmbienteAtivo").value;
                 document.querySelector("#AmbienteAtivo").dataset.atual = body.ativo_ambiente;
                 if(body.ativo_ambiente !== 'null'){
-                    document.querySelector("#VoltarAtivo").href = "/pages/ativos.html?id="+body.ativo_ambiente;
+                    document.querySelector("#VoltarAtivo").href = "../pages/ativos.html?id="+body.ativo_ambiente;
                 } else {
                     body.ativo_ambiente = null;
-                    document.querySelector("#VoltarAtivo").href = "/pages/ativos.html";
+                    document.querySelector("#VoltarAtivo").href = "../pages/ativos.html";
                 }
             }
             if(body.descricao !== undefined || body.categoria !== undefined || body.ativo_ambiente !== undefined){
@@ -132,7 +132,7 @@ window.onload = function() {
                             icon: 'success',
                             confirmButtonText: 'Ok'
                         }).then(() => {
-                            window.location.assign("/pages/ativo.html?id="+response.data.id+"&ambiente="+document.querySelector("#AmbienteAtivo").value);
+                            window.location.assign("../pages/ativo.html?id="+response.data.id+"&ambiente="+document.querySelector("#AmbienteAtivo").value);
                         });
                     })
                     .catch(err => console.error(err));
@@ -144,7 +144,7 @@ window.onload = function() {
     if(document.querySelector("#ExecAtivo")){
         document.querySelector("#ExecQR").parentNode.removeChild(document.querySelector("#ExecQR"));
         if(ambiente !== null){
-            document.querySelector("#VoltarAtivo").href = "/pages/ativos.html?id="+ambiente;
+            document.querySelector("#VoltarAtivo").href = "../pages/ativos.html?id="+ambiente;
         }
 
         // let numero = Math.floor(Math.random() * 100).toString().padStart(2, '0');
@@ -171,7 +171,7 @@ window.onload = function() {
                         icon: 'success',
                         confirmButtonText: 'Ok'
                     }).then(() => {
-                        window.location.assign("/pages/ativo.html?id="+response.data.id+"&ambiente="+ambiente);
+                        window.location.assign("../pages/ativo.html?id="+response.data.id+"&ambiente="+ambiente);
                     });
                 })
                 .catch(err => console.error(err));
@@ -198,7 +198,7 @@ function ConsultaAtivo(id) {
                 document.querySelector("#AmbienteAtivo").dataset.atual = response[0].ativo_ambiente;
 
                 if(response[0].ativo_ambiente !== null){
-                    document.querySelector("#VoltarAtivo").href = "/pages/ativos.html?id="+response[0].ativo_ambiente;
+                    document.querySelector("#VoltarAtivo").href = "../pages/ativos.html?id="+response[0].ativo_ambiente;
                 }
             } else {
                 Swal.fire({
