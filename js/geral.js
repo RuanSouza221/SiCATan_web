@@ -20,13 +20,13 @@ if(localStorage.getItem("token") !== null){
             })
             .catch(err => console.error(err));
     }
-    if((new URL(window.location.href).pathname) === "/pages/login.html"){
+    if((new URL(window.location.href).pathname).includes('/pages/login.html')){
         window.location.assign("../pages/organizacao.html");
     }
 } else {
     let pathname = (new URL(window.location.href).pathname);
 
-    if(!(pathname === "/pages/login.html" || (pathname === "/pages/usuario.html"))){
+    if(!(pathname.includes('/pages/login.html') || (pathname.includes('/pages/usuario.html')))){
         window.location.assign("../pages/login.html");
     }
 }
