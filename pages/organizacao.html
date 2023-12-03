@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SiCATan</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link href="../css/geral.css" rel="stylesheet">
+</head>
+<body>
+<div id="navbar"></div>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb mt-3 ms-3">
+        <li class="breadcrumb-item active" aria-current="page">Gerenciamento da organização</li>
+    </ol>
+</nav>
+<div class="container-sm mt-3">
+    <form>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" id="PesquisaUsuario" placeholder="Pesquisa de usuários">
+            <label for="PesquisaUsuario"></label>
+            <button class="btn btn-danger" type="button" id="Buscar">
+                <span class="mt-1 material-symbols-outlined">search</span>
+            </button>
+        </div>
+    </form>
+</div>
+<div class="container-sm">
+    <ul class="list-group" id="ListaUsuarios">
+    </ul>
+</div>
+<div class="container text-center mt-3 mb-5">
+    <a href="/pages/usuario.html?modo=organizacao" class="btn btn-danger">Criar usuários</a>
+</div>
+<div class="mb-3"><br></div>
+
+<div id="navbar-bottom"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="../js/geral.js"></script>
+<script src="../js/organizacao.js"></script>
+</body>
+</html>
