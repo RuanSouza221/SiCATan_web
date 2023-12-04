@@ -1,5 +1,5 @@
 "use strict";
-const Base_URI = "http://localhost:8000";
+const Base_URI = "https://episematic-polarity.000webhostapp.com";
 let Nivel_acesso
 var options = {
     method: "",
