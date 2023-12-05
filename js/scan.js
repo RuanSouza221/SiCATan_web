@@ -4,7 +4,7 @@ window.onload = function() {
     // const resultDiv = document.querySelector("#result");
 
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        navigator.mediaDevices.getUserMedia({ video: true })
+        navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
             .then((stream) => {
                 // Define o stream de vídeo no elemento video
                 video.srcObject = stream;
@@ -14,7 +14,7 @@ window.onload = function() {
                 video.addEventListener('canplay', () => {
                     intervalId = setInterval(() => {
                         processarQuadro(video);
-                    }, 300);
+                    }, 1000);
                 });
             })
             .catch((error) => {
