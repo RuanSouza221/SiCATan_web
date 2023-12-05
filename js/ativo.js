@@ -27,7 +27,7 @@ window.onload = function() {
             document.querySelector("#AmbienteAtivo").appendChild(opg);
 
 
-            if(ambiente !== null){
+            if(ambiente !== null && ambiente !== 'null'){
 
                 options.method = "GET";
                 fetch(Base_URI + '/ativos/'+ambiente, options)
