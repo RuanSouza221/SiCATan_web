@@ -177,7 +177,7 @@ window.onload = function() {
                         icon: 'success',
                         confirmButtonText: 'Ok'
                     }).then(() => {
-                        window.location.assign("../pages/ativo.html?id="+response.data.id+"&ambiente="+ambiente);
+                        window.location.assign("../pages/ativo.html?id="+response.data.id+"&ambiente="+document.querySelector("#AmbienteAtivo").value);
                     });
                 })
                 .catch(err => console.error(err));
@@ -213,7 +213,11 @@ function ConsultaAtivo(id) {
                     icon: "info",
                     confirmButtonText: 'Ok'
                 }).then(() => {
-                    window.history.go(-1);
+                    if(document.referrer.includes("/pages/scan.html")){
+                        window.location.assign("../pages/scan.html");
+                    } else {
+                        window.history.go(-1);
+                    }
                 });
             }
         })
