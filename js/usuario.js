@@ -66,12 +66,22 @@ window.onload = function() {
                 fetch(Base_URI+'/usuarios', options)
                     .then(response => response.json())
                     .then(response => {
-                        Swal.fire({
-                            title: 'Atualizado com sucesso',
-                            text: "suas alterações foram salvas",
-                            icon: 'success',
-                            confirmButtonText: 'Ok'
-                        })
+                        if(response.status !== "error"){
+                            Swal.fire({
+                                title: 'Atualizado com sucesso',
+                                text: "suas alterações foram salvas",
+                                icon: 'success',
+                                confirmButtonText: 'Ok'
+                            })
+                        } else {
+                            Swal.fire({
+                                title: 'Problema ao Atualizar',
+                                text: response.message,
+                                icon: 'warning',
+                                confirmButtonText: 'Ok'
+                            })
+                        }
+
                     })
                     .catch(err => console.error(err));
             }

@@ -66,11 +66,21 @@ function AtivaDelete(){
                             .then(response => response.json())
                             .then(response => {
                                 console.log(response);
-                                Swal.fire({
-                                    title: 'Apagado com Sucesso',
-                                    icon: 'success',
-                                    confirmButtonText: 'Ok'
-                                })
+                                if(response.status !== "error"){
+                                    Swal.fire({
+                                        title: 'Apagado com Sucesso',
+                                        icon: 'success',
+                                        confirmButtonText: 'Ok'
+                                    })
+                                } else {
+                                    Swal.fire({
+                                        title: 'Problema ao Apagar',
+                                        text: response.message,
+                                        icon: 'warning',
+                                        confirmButtonText: 'Ok'
+                                    })
+                                }
+
                                 options.body = null;
                                 BuscarUsuarios(document.querySelector("#PesquisaUsuario").value);
                             })
