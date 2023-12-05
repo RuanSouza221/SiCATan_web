@@ -1,0 +1,15 @@
+{
+  "name": "SiCATan",
+  "short_name": "SiCATan",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#fff",
+  "theme_color": "#fdd",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "icon-192x192.png",
+      "type": "image/png", "sizes": "192x192"
+    }
+  ]
+}
