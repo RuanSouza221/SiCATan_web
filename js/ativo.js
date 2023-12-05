@@ -80,18 +80,24 @@ window.onload = function() {
         .catch(err => console.error(err));
 
     if(document.querySelector("#ExecQR")){
-        document.querySelector("#ExecQR").onclick = function() {
-            let divqr = document.createElement('div');
-            new QRCode(divqr, {
-                text: id,
-                width: 128,
-                height: 128
-            });
-            let imgqr = divqr.getElementsByTagName("img")[0];
-            imgqr.onload = function () {
-                let janelaImpressao = window.open('', '_blank');
-                janelaImpressao.document.write('<img alt="qrcode" src="' + imgqr.src + '" />');
-                janelaImpressao.document.close();
+        let divqr = document.createElement('div');
+        new QRCode(divqr, {
+            text: id,
+            width: 128,
+            height: 128
+        });
+        let imgqr = divqr.getElementsByTagName("img")[0];
+        imgqr.onload = function () {
+            let testejanela = window.open('', '_blank');
+            if(testejanela !== null){
+                testejanela.close();
+                document.querySelector("#ExecQR").onclick = function() {
+                    let janelaImpressao = window.open('', '_blank');
+                    janelaImpressao.document.write('<img alt="qrcode" src="' + imgqr.src + '" />');
+                    janelaImpressao.document.close();
+                }
+            } else {
+                document.querySelector("#ExecQR").href = imgqr.src;
             }
         }
     }
