@@ -206,7 +206,7 @@ function ConsultaAtivo(id) {
                 Swal.close();
             } else {
                 Swal.fire({
-                    title: "Ativo não indentificado",
+                    title: "Ativo não identificado",
                     text: "Ativo não encontrado  com o código fornecido.",
                     icon: "info",
                     confirmButtonText: 'Ok'
