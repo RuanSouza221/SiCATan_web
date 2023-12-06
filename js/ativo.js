@@ -80,26 +80,13 @@ window.onload = function() {
         .catch(err => console.error(err));
 
     if(document.querySelector("#ExecQR")){
-        let divqr = document.createElement('div');
-        new QRCode(divqr, {
-            text: id,
-            width: 128,
-            height: 128
-        });
-        let imgqr = divqr.getElementsByTagName("img")[0];
-        imgqr.onload = function () {
-            let testejanela = window.open('', '_blank');
-            if(testejanela !== null){
-                testejanela.close();
-                document.querySelector("#ExecQR").onclick = function() {
-                    let janelaImpressao = window.open('', '_blank');
-                    janelaImpressao.document.write('<img alt="qrcode" src="' + imgqr.src + '" />');
-                    janelaImpressao.document.close();
-                }
-            } else {
-                document.querySelector("#ExecQR").href = imgqr.src;
-            }
+        let ambiente_get = "";
+
+        if(ambiente !== null && ambiente !== 'null'){
+            ambiente_get = "&ambiente="+ambiente;
         }
+
+        document.querySelector("#ExecQR").href = "../pages/qrcode.html?id="+id + ambiente_get;
     }
 
     if(document.querySelector("#ExecPUTAtivo")){
