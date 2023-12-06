@@ -25,9 +25,11 @@ window.onload = function() {
             document.querySelector("#ExecUsuario").innerHTML = "Atualizar Conta";
             document.querySelector("#ExecUsuario").id = "ExecPUTUsuario";
             options.method = "GET";
+            Swal.fire({allowOutsideClick:false,allowEscapeKey:false,didOpen:()=>{Swal.showLoading()}});
             fetch(Base_URI + '/usuarios/'+id, options)
                 .then(response => response.json())
                 .then(response => {
+                    Swal.close();
                     document.querySelector("#NomeUsuario").value = response[0].nome;
                     document.querySelector("#NomeUsuario").dataset.atual = response[0].nome;
                     document.querySelector("#EmailUsuario").value = response[0].email;
@@ -35,7 +37,7 @@ window.onload = function() {
                     document.querySelector("#NivelUsuario").value = response[0].nivel;
                     document.querySelector("#NivelUsuario").dataset.atual = response[0].nivel;
                 })
-                .catch(err => console.error(err));
+                .catch(err => {console.error(err);Swal.close();});
         }
     }
 
@@ -63,6 +65,7 @@ window.onload = function() {
                 options.method = "PUT";
                 options.headers.Authorization = "Bearer "+ localStorage.getItem("token");
                 options.body = JSON.stringify(body);
+                Swal.fire({allowOutsideClick:false,allowEscapeKey:false,didOpen:()=>{Swal.showLoading()}});
                 fetch(Base_URI+'/usuarios', options)
                     .then(response => response.json())
                     .then(response => {
@@ -83,7 +86,7 @@ window.onload = function() {
                         }
 
                     })
-                    .catch(err => console.error(err));
+                    .catch(err => {console.error(err);Swal.close();});
             }
 
         };
@@ -109,10 +112,11 @@ window.onload = function() {
 
             options.method = "POST";
             options.body = JSON.stringify(body);
+            Swal.fire({allowOutsideClick:false,allowEscapeKey:false,didOpen:()=>{Swal.showLoading()}});
             fetch(Base_URI+'/usuarios', options)
                 .then(response => response.json())
                 .then(response => {
-
+                    Swal.close();
                     if(typeof response.data !== "undefined"){
                         if(localStorage.getItem("token") === null && (new URLSearchParams(window.location.search)).get("modo") === null){
                             let body = {};
@@ -120,9 +124,11 @@ window.onload = function() {
                             body.senha = document.querySelector("#SenhaUsuario").value;
                             options.method = "POST";
                             options.body = JSON.stringify(body);
+                            Swal.fire({allowOutsideClick:false,allowEscapeKey:false,didOpen:()=>{Swal.showLoading()}});
                             fetch(Base_URI+'/login', options)
                                 .then(response => response.json())
                                 .then(response => {
+                                    Swal.close();
                                     if(response.status === "success" && typeof response.data.access_token === "string"){
                                         localStorage.setItem('token', response.data.access_token);
                                         body = {};
@@ -130,9 +136,11 @@ window.onload = function() {
                                         options.method = "POST";
                                         options.headers.Authorization = "Bearer "+ localStorage.getItem("token");
                                         options.body = JSON.stringify(body);
+                                        Swal.fire({allowOutsideClick:false,allowEscapeKey:false,didOpen:()=>{Swal.showLoading()}});
                                         fetch(Base_URI+'/organizacao', options)
                                             .then(response => response.json())
                                             .then(response => {
+                                                Swal.close();
                                                 console.log(response);
                                                 if(response.status === "success"){
                                                     localStorage.removeItem("token");
@@ -146,7 +154,7 @@ window.onload = function() {
                                                     });
                                                 }
                                             })
-                                            .catch(err => console.error(err));
+                                            .catch(err => {console.error(err);Swal.close();});
                                     }
                                 })
 
@@ -169,7 +177,7 @@ window.onload = function() {
                         })
                     }
                 })
-                .catch(err => console.error(err));
+                .catch(err => {console.error(err);Swal.close();});
         };
     }
 };

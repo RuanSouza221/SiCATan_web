@@ -11,9 +11,11 @@ window.onload = function() {
     }
 
     options.method = "GET";
+    Swal.fire({allowOutsideClick:false,allowEscapeKey:false,didOpen:()=>{Swal.showLoading()}});
     fetch(Base_URI + '/ativos/?organizacao='+organizacao, options)
         .then(response => response.json())
         .then(response => {
+            Swal.close();
             let opg = document.createElement('optgroup');
             opg.label = "Raiz";
             response.forEach(function(elemento) {
@@ -30,9 +32,11 @@ window.onload = function() {
             if(ambiente !== null && ambiente !== 'null'){
 
                 options.method = "GET";
+                Swal.fire({allowOutsideClick:false,allowEscapeKey:false,didOpen:()=>{Swal.showLoading()}});
                 fetch(Base_URI + '/ativos/'+ambiente, options)
                     .then(response => response.json())
                     .then(response => {
+                        Swal.close();
                         let opg = document.createElement('optgroup');
                         opg.label = "Pai";
                         let opt = document.createElement('option');
@@ -46,9 +50,11 @@ window.onload = function() {
                             ambiente_opg = opg;
 
                             options.method = "GET";
+                            Swal.fire({allowOutsideClick:false,allowEscapeKey:false,didOpen:()=>{Swal.showLoading()}});
                             fetch(Base_URI + '/ativos/'+pai_ambiente, options)
                                 .then(response => response.json())
                                 .then(response => {
+                                    Swal.close();
                                     let opg = document.createElement('optgroup');
                                     opg.label = "Avô";
                                     let opt = document.createElement('option');
@@ -60,7 +66,7 @@ window.onload = function() {
                                     document.querySelector("#AmbienteAtivo").value = ambiente;
                                     montaSelectIrmaos(ambiente,id);
                                 })
-                                .catch(err => console.error(err));
+                                .catch(err => {console.error(err); Swal.close();});
 
                         } else {
                             document.querySelector("#AmbienteAtivo").appendChild(opg);
@@ -68,7 +74,7 @@ window.onload = function() {
                             montaSelectIrmaos(ambiente,id);
                         }
                     })
-                    .catch(err => console.error(err));
+                    .catch(err => {console.error(err); Swal.close();});
 
 
                 document.querySelector("#AmbienteAtivo").value = ambiente;
@@ -77,7 +83,7 @@ window.onload = function() {
                 ConsultaAtivo(id);
             }
         })
-        .catch(err => console.error(err));
+        .catch(err => {console.error(err); Swal.close();});
 
     if(document.querySelector("#ExecQR")){
         let ambiente_get = "";
@@ -115,6 +121,7 @@ window.onload = function() {
                 options.method = "PUT";
                 options.headers.Authorization = "Bearer "+ localStorage.getItem("token");
                 options.body = JSON.stringify(body);
+                Swal.fire({allowOutsideClick:false,allowEscapeKey:false,didOpen:()=>{Swal.showLoading()}});
                 fetch(Base_URI+'/ativos', options)
                     .then(response => response.json())
                     .then(response => {
@@ -125,10 +132,11 @@ window.onload = function() {
                             icon: 'success',
                             confirmButtonText: 'Ok'
                         }).then(() => {
+                            Swal.fire({allowOutsideClick:false,allowEscapeKey:false,didOpen:()=>{Swal.showLoading()}});
                             window.location.assign("../pages/ativo.html?id="+response.data.id+"&ambiente="+document.querySelector("#AmbienteAtivo").value);
                         });
                     })
-                    .catch(err => console.error(err));
+                    .catch(err => {console.error(err); Swal.close();});
             }
         }
 
@@ -153,6 +161,7 @@ window.onload = function() {
             options.method = "POST";
             options.headers.Authorization = "Bearer "+ localStorage.getItem("token");
             options.body = JSON.stringify(body);
+            Swal.fire({allowOutsideClick:false,allowEscapeKey:false,didOpen:()=>{Swal.showLoading()}});
             fetch(Base_URI+'/ativos', options)
                 .then(response => response.json())
                 .then(response => {
@@ -167,7 +176,7 @@ window.onload = function() {
                         window.location.assign("../pages/ativo.html?id="+response.data.id+"&ambiente="+document.querySelector("#AmbienteAtivo").value);
                     });
                 })
-                .catch(err => console.error(err));
+                .catch(err => {console.error(err); Swal.close();});
         }
     }
     if(Nivel_acesso > 2){
@@ -178,6 +187,7 @@ window.onload = function() {
 function ConsultaAtivo(id) {
 
     options.method = "GET";
+    Swal.fire({allowOutsideClick:false,allowEscapeKey:false,didOpen:()=>{Swal.showLoading()}});
     fetch(Base_URI + '/ativos/'+id, options)
         .then(response => response.json())
         .then(response => {
@@ -193,6 +203,7 @@ function ConsultaAtivo(id) {
                 if(response[0].ativo_ambiente !== null){
                     document.querySelector("#VoltarAtivo").href = "../pages/ativos.html?id="+response[0].ativo_ambiente;
                 }
+                Swal.close();
             } else {
                 Swal.fire({
                     title: "Ativo não indentificado",
@@ -208,14 +219,16 @@ function ConsultaAtivo(id) {
                 });
             }
         })
-        .catch(err => console.error(err));
+        .catch(err => {console.error(err); Swal.close();});
 }
 
 function montaSelectIrmaos(ambiente,id) {
     options.method = "GET";
+    Swal.fire({allowOutsideClick:false,allowEscapeKey:false,didOpen:()=>{Swal.showLoading()}});
     fetch(Base_URI + '/ativos/?ativo_ambiente='+ambiente, options)
         .then(response => response.json())
         .then(response => {
+            Swal.close();
             if(response.message === undefined){
                 let opg = document.createElement('optgroup');
                 opg.label = "Irmãos";
@@ -231,5 +244,5 @@ function montaSelectIrmaos(ambiente,id) {
                 document.querySelector("#AmbienteAtivo").value = ambiente;
             }
         })
-        .catch(err => console.error(err));
+        .catch(err => {console.error(err); Swal.close();});
 }

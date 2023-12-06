@@ -11,15 +11,17 @@ window.onload = function() {
         ambiente = "&ambiente="+id;
 
         options.method = "GET";
+        Swal.fire({allowOutsideClick:false,allowEscapeKey:false,didOpen:()=>{Swal.showLoading()}});
         fetch(Base_URI + '/ativos/'+id, options)
             .then(response => response.json())
             .then(response => {
+                Swal.close();
                 document.querySelector("#NomeAtivo").innerHTML += '<li class="breadcrumb-item" aria-current="page">'+response[0].descricao+'</li>';
                 if(response[0].ativo_ambiente !== null){
                     document.querySelector("#VoltarAtivos").href = "../pages/ativos.html?id="+response[0].ativo_ambiente;
                 }
             })
-            .catch(err => console.error(err));
+            .catch(err => {console.error(err);Swal.close();});
 
     } else {
         document.querySelector("#VoltarAtivos").parentNode.removeChild(document.querySelector("#VoltarAtivos"));
@@ -45,6 +47,7 @@ function BuscarAtivos(get,ambiente,dados=null){
     }
 
     options.method = "GET";
+    Swal.fire({allowOutsideClick:false,allowEscapeKey:false,didOpen:()=>{Swal.showLoading()}});
     fetch(Base_URI + '/ativos/' + get + dado, options)
         .then(response => response.json())
         .then(response => {
@@ -62,9 +65,10 @@ function BuscarAtivos(get,ambiente,dados=null){
                     document.querySelector("#ListaAtivos").innerHTML += elem;
                 }
             });
+            Swal.close();
             AtivaDelete();
         })
-        .catch(err => console.error(err));
+        .catch(err => {console.error(err);Swal.close();});
 }
 
 function AtivaDelete(){
@@ -89,6 +93,7 @@ function AtivaDelete(){
                         options.method = "PUT";
                         options.headers.Authorization = "Bearer "+ localStorage.getItem("token");
                         options.body = JSON.stringify(body);
+                        Swal.fire({allowOutsideClick:false,allowEscapeKey:false,didOpen:()=>{Swal.showLoading()}});
                         fetch(Base_URI+'/ativos', options)
                             .then(response => response.json())
                             .then(response => {

@@ -17,6 +17,7 @@ function BuscarUsuarios (dados= null) {
         get = "&nome="+dados;
     }
     options.method = "GET";
+    Swal.fire({allowOutsideClick:false,allowEscapeKey:false,didOpen:()=>{Swal.showLoading()}});
     fetch(Base_URI + '/usuarios/?order=nome&organizacao='+localStorage.getItem("organizacao")+get, options)
         .then(response => response.json())
         .then(response => {
@@ -34,10 +35,11 @@ function BuscarUsuarios (dados= null) {
                         '</li>';
                     document.querySelector("#ListaUsuarios").innerHTML += elem;
                 }
+                Swal.close();
                 AtivaDelete();
             });
         })
-        .catch(err => console.error(err));
+        .catch(err => {console.error(err);Swal.close();});
 }
 
 function AtivaDelete(){
@@ -62,29 +64,33 @@ function AtivaDelete(){
                         options.method = "PUT";
                         options.headers.Authorization = "Bearer "+ localStorage.getItem("token");
                         options.body = JSON.stringify(body);
+                        Swal.fire({allowOutsideClick:false,allowEscapeKey:false,didOpen:()=>{Swal.showLoading()}});
                         fetch(Base_URI+'/usuarios', options)
                             .then(response => response.json())
                             .then(response => {
                                 console.log(response);
+                                let title,text,icon;
                                 if(response.status !== "error"){
-                                    Swal.fire({
-                                        title: 'Apagado com Sucesso',
-                                        icon: 'success',
-                                        confirmButtonText: 'Ok'
-                                    })
+                                    title = "Apagado com Sucesso";
+                                    text = null;
+                                    icon = "success";
                                 } else {
-                                    Swal.fire({
-                                        title: 'Problema ao Apagar',
-                                        text: response.message,
-                                        icon: 'warning',
-                                        confirmButtonText: 'Ok'
-                                    })
+                                    title = "Problema ao Apagar";
+                                    text = response.message
+                                    icon = "warning";
                                 }
+                                Swal.fire({
+                                    title: title,
+                                    text: text,
+                                    icon: icon,
+                                    confirmButtonText: 'Ok'
+                                }).then(() => {
+                                    options.body = null;
+                                    BuscarUsuarios(document.querySelector("#PesquisaUsuario").value);
+                                });
 
-                                options.body = null;
-                                BuscarUsuarios(document.querySelector("#PesquisaUsuario").value);
                             })
-                            .catch(err => console.error(err));
+                            .catch(err => {console.error(err);Swal.close();});
 
                     }
                 });

@@ -8,9 +8,11 @@ if(document.querySelector("#ExecLogin")){
 
         options.method = "POST";
         options.body = JSON.stringify(body);
+        Swal.fire({allowOutsideClick:false,allowEscapeKey:false,didOpen:()=>{Swal.showLoading()}});
         fetch(Base_URI+'/login', options)
             .then(response => response.json())
             .then(response => {
+                Swal.close();
                 if(response.status === "success" && typeof response.data.access_token === "string"){
                     localStorage.setItem('token', response.data.access_token);
                     window.location.assign("../pages/organizacao.html");
@@ -23,6 +25,6 @@ if(document.querySelector("#ExecLogin")){
                     })
                 }
             })
-            .catch(err => console.error(err));
+            .catch(err => {console.error(err);Swal.close();});
     };
 }
