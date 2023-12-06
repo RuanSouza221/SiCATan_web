@@ -1,5 +1,5 @@
 "use strict";
-const Base_URI = "https://episematic-polarity.000webhostapp.com";
+const Base_URI = "https://sicatan.ruansouza.dev.br";
 let Nivel_acesso
 var options = {
     method: "",
