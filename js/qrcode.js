@@ -11,9 +11,9 @@ window.onload = function() {
     document.querySelector("#qrcode > img").onload = function () {
         document.querySelector("#qrcode > img").removeAttribute("style");
         document.querySelector("#ExecQRcode").href = this.src;
+        document.querySelector("#ExecQRcode").download = id+".png"
     }
 
-//../pages/ativo.html
     let ambiente_get = "";
     if(ambiente !== null && ambiente !== 'null'){
         ambiente_get = "&ambiente="+ambiente;
