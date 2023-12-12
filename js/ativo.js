@@ -148,9 +148,9 @@ window.onload = function() {
             document.querySelector("#VoltarAtivo").href = "../pages/ativos.html?id="+ambiente;
         }
 
-        let numero = Math.floor(Math.random() * 100).toString().padStart(2, '0');
-        document.querySelector("#DescricaoAtivo").value = "Ativo_"+ numero;
-        document.querySelector("#CategoriaAtivo").value = "Categoria_"+ numero;
+        // let numero = Math.floor(Math.random() * 100).toString().padStart(2, '0');
+        // document.querySelector("#DescricaoAtivo").value = "Ativo_"+ numero;
+        // document.querySelector("#CategoriaAtivo").value = "Categoria_"+ numero;
         document.querySelector("#ExecAtivo").onclick = function() {
             let body = {};
             body.descricao = document.querySelector("#DescricaoAtivo").value;

@@ -93,10 +93,10 @@ window.onload = function() {
     }
 
     if(document.querySelector("#ExecUsuario")){
-        let numero = Math.floor(Math.random() * 100).toString().padStart(2, '0');
-        document.querySelector("#NomeUsuario").value = "Usuario_"+numero;
-        document.querySelector("#EmailUsuario").value = "Usuario_"+numero+"@mail.com";
-        document.querySelector("#SenhaUsuario").value = "123";
+        // let numero = Math.floor(Math.random() * 100).toString().padStart(2, '0');
+        // document.querySelector("#NomeUsuario").value = "Usuario_"+numero;
+        // document.querySelector("#EmailUsuario").value = "Usuario_"+numero+"@mail.com";
+        // document.querySelector("#SenhaUsuario").value = "123";
         document.querySelector("#ExecUsuario").onclick = function() {
             let body = {};
             body.nome = document.querySelector("#NomeUsuario").value;
